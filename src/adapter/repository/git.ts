@@ -324,17 +324,14 @@ export class Git implements IGitService {
     public async cherryPick(hash: string): Promise<void> {
         await this.exec('cherry-pick', hash);
     }
-
     public async checkout(hash: string) : Promise<void> {
-        await this.exec('checkout', hash);
+        this.repo.checkout(hash);
     }
-
     public async revertCommit(hash: string): Promise<void> {
         await this.exec('revert', '--no-edit', hash);
     }
-
     public async createBranch(branchName: string, hash: string): Promise<void> {
-        await this.exec('checkout', '-b', branchName, hash);
+        await this.repo.createBranch(branchName, true, hash);
     }
     public async createTag(tagName: string, hash: string): Promise<void> {
         await this.exec('tag', '-a', tagName, '-m', tagName, hash);
