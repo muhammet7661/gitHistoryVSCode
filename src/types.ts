@@ -166,6 +166,7 @@ export type CommitComparison = {
 export const IGitServiceFactory = Symbol('IGitServiceFactory');
 
 export interface IGitServiceFactory {
+    repositoryPicker(): Promise<void>;
     createGitService(resource?: Uri | string): Promise<IGitService>;
 }
 
