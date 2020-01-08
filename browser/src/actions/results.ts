@@ -74,10 +74,6 @@ export const selectCommittedFile = (logEntry: LogEntry, committedFile: Committed
 export const closeCommitView = () => {
     // tslint:disable-next-line:no-any
     return async (dispatch: Dispatch<any>, getState: () => RootState) => {
-        const state = getState();
-        const url = getQueryUrl(state, '/log/clearSelection');
-        // tslint:disable-next-line:no-backbone-get-set-outside-model
-        await axios.post(url);
         await dispatch(clearCommitSelection());
     };
 };
@@ -88,9 +84,6 @@ export const selectCommit = (hash?: string) => {
         if (hash) {
             await fetchCommit(dispatch, state, hash);
         } else {
-            const url = getQueryUrl(state, '/log/clearSelection');
-            // tslint:disable-next-line:no-backbone-get-set-outside-model
-            await axios.get(url);
             await dispatch(clearCommitSelection());
         }
     };
@@ -129,7 +122,9 @@ export const selectBranch = (branchName: string) => {
     // tslint:disable-next-line:no-any
     return (dispatch: Dispatch<any>, getState: () => RootState) => {
         const state = getState();
-        return fetchCommits(dispatch, state, 0, undefined, '', true, branchName);
+        state.logEntries.branch = state.settings.selectedBranchName = branchName;
+        
+        return fetchCommits(dispatch, state, 0, undefined, '', true);
     };
 };
 export const selectAuthor = (authorName: string) => {
@@ -143,6 +138,8 @@ export const refresh = () => {
     // tslint:disable-next-line:no-any
     return (dispatch: Dispatch<any>, getState: () => RootState) => {
         const state = getState();
+        // update branches
+        fetchBranches(dispatch, state);
         return fetchCommits(dispatch, state, undefined, undefined, undefined, true);
     };
 };
@@ -177,19 +174,16 @@ function fixDates(logEntry: LogEntry) {
 }
 // tslint:disable-next-line:no-any
 function fetchCommits(dispatch: Dispatch<any>, store: RootState, pageIndex?: number, pageSize?: number, searchText?: string, refreshData?: boolean, branchName?: string, author?: string) {
-    // pageSize = pageSize || store.logEntries.pageSize;
     const id = store.settings.id || '';
     const queryParts = [];
     queryParts.push(`id=${encodeURIComponent(id)}`);
-    if (typeof branchName === 'string') {
-        queryParts.push(`branch=${encodeURIComponent(branchName)}`);
+
+    if (store.settings.selectedBranchName) {
+        queryParts.push(`branch=${encodeURIComponent(store.settings.selectedBranchName)}`);
     }
-    // if (store.settings.file) {
-    //     queryParts.push(`file=${encodeURIComponent(store.settings.file)}`);
-    // }
-    // if (store.settings.selectedBranchType) {
-    //     queryParts.push(`branchSelection=${encodeURIComponent(store.settings.selectedBranchType.toString())}`);
-    // }
+    if (store.settings.file) {
+        queryParts.push(`file=${encodeURIComponent(store.settings.file)}`);
+    }
     if (typeof searchText === 'string') {
         queryParts.push(`searchText=${encodeURIComponent(searchText)}`);
     }
