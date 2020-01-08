@@ -6,7 +6,12 @@
     <title>Git Log</title>
     <link rel='stylesheet' type='text/css' href='bundle.css' />
     <style id="_defaultStyles">
-      
+      :root {
+        --vscode-editor-background: white; 
+        --vscode-editorGutter-deletedBackground: #a54141; 
+        --vscode-editorGutter-addedBackground: green; 
+        --vscode-terminal-ansiBrightBlack: gray;
+      }
     </style>
     <script>
       window['configuration'] = <%- JSON.stringify(config) %>;
@@ -18,8 +23,17 @@
         document.getElementById('_defaultStyles').innerHTML = ':root { ' + event.data +  '  }';
       }
 
-      window.addEventListener('message', receiveMessage, false);
+      try
+      {
+        // if same origin assum it is opened from external browser (for debugging puposes)
+          sameOrigin = window.parent.location.host == window.location.host;
+      }
+      catch (e)
+      {
+        document.getElementById('_defaultStyles').innerHTML = '';
+      }
 
+      window.addEventListener('message', receiveMessage, false);
     </script>
   </head>
     <body>

@@ -416,7 +416,7 @@ div.react-draggable {
 
 div.details-view-cnt {
 	position: fixed !important;
-    background: var(--vscode-editor-background);
+    background-color: var(--vscode-editor-background);
 	border-top-width: 1px;
 	border-top-style: solid;
 	border-top-color: var(--vscode-editorGroup-border);
