@@ -433,7 +433,7 @@
         "react-router-redux": "^4.0.8",
         "redux": "^3.7.2",
         "redux-actions": "^2.2.1",
-        "redux-thunk": "2.2.0",
+        "redux-thunk": "2.3.0",
         "relative": "^3.0.2",
         "remap-istanbul": "^0.9.5",
         "source-map-support": "^0.5.0",
