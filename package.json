@@ -390,7 +390,7 @@
         "@types/md5": "^2.1.32",
         "@types/mocha": "^2.2.32",
         "@types/node": "^6.0.49",
-        "@types/os-locale": "^2.1.0",
+        "@types/os-locale": "^4.0.2",
         "@types/query-string": "^3.0.31",
         "@types/react": "^16.0.20",
         "@types/react-dom": "^16.0.2",
