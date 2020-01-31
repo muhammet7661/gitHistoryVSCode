@@ -443,7 +443,7 @@
         "tslint-microsoft-contrib": "^5.0.1",
         "typemoq": "^2.1.0",
         "typescript": "^2.6.1",
-        "typescript-formatter": "^6.0.0",
+        "typescript-formatter": "^7.2.2",
         "vscode": "^1.1.34",
         "webpack": "4.41.2",
         "webpack-cli": "^3.3.10",
