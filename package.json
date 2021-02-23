@@ -389,7 +389,7 @@
         "@types/gravatar": "^1.4.28",
         "@types/md5": "^2.1.32",
         "@types/mocha": "^2.2.32",
-        "@types/node": "^6.0.49",
+        "@types/node": "^14.14.31",
         "@types/os-locale": "^2.1.0",
         "@types/query-string": "^3.0.31",
         "@types/react": "^16.0.20",
