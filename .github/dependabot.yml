@@ -1,0 +1,35 @@
+version: 2
+registries:
+  git-github-com:
+    type: git
+    url: https://github.com
+    username: muhammet7661
+    password: "${{secrets.GIT_GITHUB_COM_PASSWORD}}"
+
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@types/react-dom"
+    versions:
+    - 17.0.0
+    - 17.0.1
+    - 17.0.2
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.20
+    - 14.14.31
+  - dependency-name: ejs
+    versions:
+    - 3.1.5
+  - dependency-name: elliptic
+    versions:
+    - 6.5.3
+  - dependency-name: handlebars
+    versions:
+    - 4.7.6
+  registries:
+  - git-github-com
